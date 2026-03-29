@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Punter's Badminton Squad</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Rajdhani:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --electric-blue: #0066FF;
+    --blue-bright: #1A8CFF;
+    --blue-glow: rgba(0,102,255,0.4);
+    --neon-yellow: #EEFF00;
+    --yellow-glow: rgba(238,255,0,0.35);
+    --charcoal: #141418;
+    --charcoal-mid: #1E1E26;
+    --charcoal-light: #2A2A36;
+    --white: #F5F5F7;
+    --gray: #888899;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--charcoal);
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: linear-gradient(180deg, rgba(20,20,24,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(6px);
+  }
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.5rem; letter-spacing: 2px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--neon-yellow); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-family: 'Rajdhani', sans-serif; font-weight: 600;
+    font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gray); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--neon-yellow); }
+  .nav-cta {
+    background: var(--electric-blue); color: var(--white);
+    border: none; padding: 10px 24px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1rem; letter-spacing: 2px;
+    cursor: pointer; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    text-transform: uppercase; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--blue-bright); }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative; height: 100vh; min-height: 700px;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 70% at 70% 50%, rgba(0,102,255,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 30% 70%, rgba(238,255,0,0.07) 0%, transparent 60%),
+      var(--charcoal);
+  }
+
+  /* Animated grid lines */
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,102,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,102,255,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridShift 20s linear infinite;
+  }
+  @keyframes gridShift {
+    0% { transform: translate(0,0); }
+    100% { transform: translate(60px, 60px); }
+  }
+
+  /* Shuttlecock SVG art — big, center-right */
+  .hero-shuttle-art {
+    position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
+    width: 520px; height: 520px; opacity: 0.92;
+    animation: floatShuttle 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 60px rgba(0,102,255,0.5)) drop-shadow(0 0 20px rgba(238,255,0,0.25));
+  }
+  @keyframes floatShuttle {
+    0%, 100% { transform: translateY(-50%) rotate(-15deg); }
+    50% { transform: translateY(calc(-50% - 20px)) rotate(-10deg); }
+  }
+
+  /* Motion blur streaks */
+  .streak {
+    position: absolute; height: 2px; border-radius: 2px;
+    opacity: 0;
+    animation: streakFly 3s ease-out infinite;
+  }
+  .streak:nth-child(1) { top: 30%; left: 10%; width: 280px; background: linear-gradient(90deg, transparent, var(--electric-blue)); animation-delay: 0s; }
+  .streak:nth-child(2) { top: 45%; left: 5%; width: 180px; background: linear-gradient(90deg, transparent, var(--neon-yellow)); animation-delay: 0.8s; }
+  .streak:nth-child(3) { top: 60%; left: 15%; width: 220px; background: linear-gradient(90deg, transparent, var(--electric-blue)); animation-delay: 1.6s; }
+  .streak:nth-child(4) { top: 20%; left: 8%; width: 140px; background: linear-gradient(90deg, transparent, rgba(238,255,0,0.6)); animation-delay: 2.4s; }
+  @keyframes streakFly {
+    0% { opacity: 0; transform: scaleX(0); transform-origin: left; }
+    30% { opacity: 1; transform: scaleX(1); }
+    100% { opacity: 0; transform: translateX(40px) scaleX(0.3); }
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 48px;
+    max-width: 680px;
+    animation: heroReveal 1s ease-out both;
+  }
+  @keyframes heroReveal {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-tag {
+    font-family: 'Space Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--neon-yellow); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-tag::before {
+    content: ''; display: block; width: 32px; height: 2px;
+    background: var(--neon-yellow);
+  }
+
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: clamp(4rem, 9vw, 7rem);
+    line-height: 0.9; text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 28px;
+  }
+  .hero-title .line1 { display: block; color: var(--white); }
+  .hero-title .line2 {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--electric-blue);
+    filter: drop-shadow(0 0 20px var(--blue-glow));
+  }
+  .hero-title .line3 { display: block; color: var(--neon-yellow); }
+
+  .hero-desc {
+    font-size: 1.15rem; font-weight: 400; line-height: 1.6;
+    color: var(--gray); max-width: 480px; margin-bottom: 40px;
+  }
+
+  .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--neon-yellow); color: var(--charcoal);
+    border: none; padding: 16px 36px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1.1rem; letter-spacing: 2px;
+    text-transform: uppercase; cursor: pointer;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--yellow-glow);
+  }
+  .btn-secondary {
+    background: transparent; color: var(--white);
+    border: 1px solid rgba(255,255,255,0.25); padding: 16px 36px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1.1rem; letter-spacing: 2px;
+    text-transform: uppercase; cursor: pointer;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--electric-blue); color: var(--blue-bright); }
+
+  .hero-stats {
+    position: absolute; bottom: 48px; left: 48px; right: 48px; z-index: 2;
+    display: flex; gap: 48px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 32px;
+  }
+  .stat-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 2.8rem;
+    color: var(--electric-blue);
+    line-height: 1;
+  }
+  .stat-number span { color: var(--neon-yellow); }
+  .stat-label {
+    font-size: 0.78rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gray); margin-top: 4px;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 100px 48px; }
+  .section-tag {
+    font-family: 'Space Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--neon-yellow); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-tag::before {
+    content: ''; display: block; width: 24px; height: 2px;
+    background: var(--neon-yellow);
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: clamp(2.5rem, 5vw, 4rem);
+    text-transform: uppercase; line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  /* ── SQUAD SECTION ── */
+  #squad { background: var(--charcoal-mid); }
+  .squad-header { max-width: 600px; margin-bottom: 64px; }
+  .squad-header p { color: var(--gray); font-size: 1.1rem; line-height: 1.6; margin-top: 16px; }
+
+  /* Group photo placeholder */
+  .squad-photo {
+    position: relative; width: 100%; max-width: 900px; margin: 0 auto 64px;
+    aspect-ratio: 16/7; background: var(--charcoal-light);
+    border: 1px solid rgba(0,102,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .squad-photo-inner {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(135deg, rgba(0,102,255,0.08) 0%, transparent 50%),
+      repeating-linear-gradient(45deg, rgba(0,102,255,0.03) 0px, rgba(0,102,255,0.03) 1px, transparent 1px, transparent 40px);
+  }
+  .squad-photo-label {
+    position: relative; z-index: 1; text-align: center;
+  }
+  .squad-photo-label svg { opacity: 0.2; margin-bottom: 12px; }
+  .squad-photo-label p {
+    font-family: 'Space Mono', monospace; font-size: 0.75rem;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--gray);
+  }
+  .squad-photo-corner {
+    position: absolute; width: 24px; height: 24px;
+    border-color: var(--electric-blue); border-style: solid;
+  }
+  .squad-photo-corner.tl { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
+  .squad-photo-corner.tr { top: 12px; right: 12px; border-width: 2px 2px 0 0; }
+  .squad-photo-corner.bl { bottom: 12px; left: 12px; border-width: 0 0 2px 2px; }
+  .squad-photo-corner.br { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+
+  /* Member cards */
+  .squad-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 24px;
+  }
+  .member-card {
+    background: var(--charcoal); border: 1px solid rgba(255,255,255,0.06);
+    padding: 28px 20px; text-align: center;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .member-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--electric-blue); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .member-card:hover { border-color: rgba(0,102,255,0.4); transform: translateY(-4px); }
+  .member-card:hover::before { transform: scaleX(1); }
+  .member-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--charcoal-light);
+    border: 2px solid rgba(0,102,255,0.3);
+    margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.4rem; color: var(--electric-blue);
+  }
+  .member-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1.1rem; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--white); margin-bottom: 4px;
+  }
+  .member-role {
+    font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--neon-yellow);
+  }
+  .member-jersey {
+    display: inline-block; margin-top: 10px;
+    font-family: 'Space Mono', monospace; font-size: 0.68rem;
+    color: var(--gray); letter-spacing: 1px;
+  }
+
+  /* ── MEMBERSHIP SECTION ── */
+  #membership {
+    background: var(--charcoal);
+    position: relative; overflow: hidden;
+  }
+  #membership::before {
+    content: '';
+    position: absolute; right: -200px; top: 50%; transform: translateY(-50%);
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,102,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .membership-header { max-width: 560px; margin-bottom: 64px; }
+  .membership-header p { color: var(--gray); font-size: 1.1rem; line-height: 1.6; margin-top: 16px; }
+
+  .plans-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px; margin-bottom: 48px;
+  }
+  .plan-card {
+    background: var(--charcoal-mid); border: 1px solid rgba(255,255,255,0.07);
+    padding: 40px 36px; position: relative; overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .plan-card:hover { transform: translateY(-6px); border-color: rgba(0,102,255,0.35); }
+  .plan-card.featured {
+    border-color: var(--electric-blue);
+    background: linear-gradient(135deg, rgba(0,102,255,0.1) 0%, var(--charcoal-mid) 60%);
+  }
+  .plan-badge {
+    position: absolute; top: 20px; right: 20px;
+    background: var(--neon-yellow); color: var(--charcoal);
+    font-family: 'Space Mono', monospace; font-size: 0.65rem;
+    font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 12px;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  }
+  .plan-name {
+    font-family: 'Space Mono', monospace; font-size: 0.75rem;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gray); margin-bottom: 16px;
+  }
+  .plan-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 3.5rem; line-height: 1;
+    color: var(--white); margin-bottom: 6px;
+  }
+  .plan-price .currency { font-size: 1.8rem; vertical-align: super; color: var(--electric-blue); }
+  .plan-period {
+    font-size: 0.85rem; color: var(--gray); letter-spacing: 1px;
+    margin-bottom: 32px;
+  }
+  .plan-divider {
+    height: 1px; background: rgba(255,255,255,0.07); margin-bottom: 28px;
+  }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .plan-features li {
+    font-size: 0.95rem; color: var(--gray);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .plan-features li::before {
+    content: ''; display: block;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--electric-blue); flex-shrink: 0;
+  }
+  .plan-features li.highlight { color: var(--white); }
+  .plan-features li.highlight::before { background: var(--neon-yellow); }
+
+  .plan-cta {
+    display: block; width: 100%; margin-top: 32px;
+    background: transparent; color: var(--white);
+    border: 1px solid rgba(255,255,255,0.2); padding: 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1rem; letter-spacing: 2px;
+    text-transform: uppercase; cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    text-align: center;
+  }
+  .plan-card.featured .plan-cta {
+    background: var(--electric-blue); border-color: var(--electric-blue);
+  }
+  .plan-cta:hover { background: var(--electric-blue); border-color: var(--electric-blue); }
+
+  /* fee notes */
+  .fee-notes {
+    display: flex; gap: 24px; flex-wrap: wrap; margin-top: 12px;
+  }
+  .fee-note {
+    flex: 1; min-width: 220px;
+    background: var(--charcoal-mid); border-left: 3px solid var(--electric-blue);
+    padding: 20px 24px;
+  }
+  .fee-note h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--white); margin-bottom: 6px;
+  }
+  .fee-note p { font-size: 0.9rem; color: var(--gray); line-height: 1.5; }
+
+  /* ── PAYMENT SECTION ── */
+  #payment {
+    background: var(--charcoal-mid); text-align: center;
+    position: relative; overflow: hidden;
+  }
+  #payment::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 50%, rgba(238,255,0,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .payment-header { margin-bottom: 56px; }
+  .payment-header .section-tag { justify-content: center; }
+  .payment-header .section-tag::before { display: none; }
+  .payment-header p { color: var(--gray); font-size: 1.1rem; line-height: 1.6; max-width: 480px; margin: 16px auto 0; }
+
+  .qr-stage {
+    display: inline-flex; flex-direction: column; align-items: center;
+    position: relative;
+  }
+  .qr-outer {
+    position: relative; width: 280px; height: 280px;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 0 60px var(--blue-glow), 0 0 120px rgba(238,255,0,0.08);
+  }
+  /* animated border */
+  .qr-outer::before {
+    content: '';
+    position: absolute; inset: -3px;
+    background: linear-gradient(135deg, var(--electric-blue), var(--neon-yellow), var(--electric-blue));
+    background-size: 200% 200%;
+    animation: borderSpin 3s linear infinite;
+    z-index: -1;
+  }
+  @keyframes borderSpin {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+  /* Scanning line animation */
+  .qr-scan-line {
+    position: absolute; left: 20px; right: 20px; top: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--electric-blue), var(--neon-yellow), var(--electric-blue), transparent);
+    animation: scanDown 2s ease-in-out infinite;
+    z-index: 10;
+  }
+  @keyframes scanDown {
+    0% { top: 20px; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: calc(100% - 20px); opacity: 0; }
+  }
+
+  .qr-placeholder {
+    width: 100%; height: 100%;
+    background: var(--charcoal-light);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 12px; position: relative; overflow: hidden;
+  }
+  /* SVG QR pattern placeholder */
+  .qr-placeholder svg { opacity: 0.9; }
+  .qr-placeholder p {
+    font-family: 'Space Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--gray);
+  }
+
+  .qr-corners span {
+    position: absolute; width: 20px; height: 20px;
+    border-color: var(--neon-yellow); border-style: solid;
+  }
+  .qr-corners span:nth-child(1) { top: 0; left: 0; border-width: 3px 0 0 3px; }
+  .qr-corners span:nth-child(2) { top: 0; right: 0; border-width: 3px 3px 0 0; }
+  .qr-corners span:nth-child(3) { bottom: 0; left: 0; border-width: 0 0 3px 3px; }
+  .qr-corners span:nth-child(4) { bottom: 0; right: 0; border-width: 0 3px 3px 0; }
+
+  .qr-label {
+    margin-top: 28px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--white);
+  }
+  .qr-upi {
+    font-family: 'Space Mono', monospace; font-size: 0.78rem;
+    color: var(--electric-blue); letter-spacing: 1px; margin-top: 6px;
+  }
+
+  .payment-methods {
+    display: flex; gap: 12px; justify-content: center; margin-top: 32px; flex-wrap: wrap;
+  }
+  .payment-pill {
+    background: var(--charcoal); border: 1px solid rgba(255,255,255,0.1);
+    padding: 8px 20px;
+    font-family: 'Space Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--gray);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal); padding: 48px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .footer-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.3rem; letter-spacing: 2px;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--neon-yellow); }
+  .footer-tagline {
+    font-family: 'Space Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 3px; color: var(--gray); text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .footer-links { display: flex; gap: 28px; list-style: none; }
+  .footer-links a {
+    font-size: 0.85rem; letter-spacing: 1px; color: var(--gray);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--neon-yellow); }
+  .footer-copy {
+    font-family: 'Space Mono', monospace; font-size: 0.65rem;
+    color: rgba(255,255,255,0.2); letter-spacing: 2px; text-transform: uppercase;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    section { padding: 72px 20px; }
+    .hero-content { padding: 0 20px; }
+    .hero-stats { left: 20px; right: 20px; gap: 24px; flex-wrap: wrap; }
+    .hero-shuttle-art { width: 280px; height: 280px; right: -80px; opacity: 0.5; }
+    .squad-photo { aspect-ratio: 16/9; }
+    .squad-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 16px; }
+    .member-card { padding: 20px 12px; }
+    .member-avatar { width: 50px; height: 50px; font-size: 1.1rem; margin-bottom: 12px; }
+    .member-name { font-size: 0.9rem; margin-bottom: 3px; }
+    .member-role { font-size: 0.65rem; }
+    footer { padding: 40px 20px; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+
+  /* scroll reveal */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">PUNTER's Badminton Squad<span></span></a>
+  <ul class="nav-links">
+    <li><a href="#squad">Squad</a></li>
+    <li><a href="#payment">Pay</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('payment').scrollIntoView({behavior:'smooth'})">Join Now</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <!-- Motion streaks -->
+  <div class="streak"></div>
+  <div class="streak"></div>
+  <div class="streak"></div>
+  <div class="streak"></div>
+
+  <!-- Badminton Racket & Shuttlecock Image -->
+  <img src="racketshuttle.png" alt="Badminton Racket and Shuttlecock" class="hero-shuttle-art" style="object-fit: contain;">
+
+  <div class="hero-content">
+    <div class="hero-tag">Established 2023 · Charholi, Pune, India</div>
+    <h1 class="hero-title">
+      <span class="line1">Punter's</span>
+      <span class="line2">Badminton</span>
+      <span class="line3">Squad.</span>
+    </h1>
+    <p class="hero-desc">Where smashes meet strategy. A community of passionate players pushing limits, one rally at a time.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary" onclick="document.getElementById('payment').scrollIntoView({behavior:'smooth'})">Join the Squad</button>
+      <button class="btn-secondary" onclick="document.getElementById('squad').scrollIntoView({behavior:'smooth'})">Meet the Team</button>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-number">13<span>+</span></div>
+      <div class="stat-label">Active Members</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">7<span>×</span></div>
+      <div class="stat-label">Weekly Sessions</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">5<span>★</span></div>
+      <div class="stat-label">Court Rating</div>
+    </div>
+  </div>
+</section>
+
+<!-- SQUAD -->
+<section id="squad">
+  <div class="squad-header reveal">
+    <div class="section-tag">The Team</div>
+    <h2 class="section-title">Meet the <span style="color:var(--electric-blue)">Squad</span></h2>
+    <p>Dedicated athletes, fierce competitors, and lifelong friends. This is what Punter's is made of.</p>
+  </div>
+
+  <!-- Group Photo Placeholder -->
+  <div class="squad-photo reveal">
+    <div class="squad-photo-inner"></div>
+    <div class="squad-photo-corner tl"></div>
+    <div class="squad-photo-corner tr"></div>
+    <div class="squad-photo-corner bl"></div>
+    <div class="squad-photo-corner br"></div>
+    <img src="squadphoto.jpg" alt="Punter's Badminton Squad" style="width: 100%; height: 100%; object-fit: cover;">
+  </div>
+
+  <!-- Member Cards -->
+  <div class="squad-grid reveal">
+    <div class="member-card">
+      <div class="member-avatar">SM</div>
+      <div class="member-name">Samir</div>
+      <div class="member-jersey">#01</div>
+    </div>
+    <div class="member-card">
+      <div class="member-avatar">PM</div>
+      <div class="member-name">Pramod</div>
+      <div class="member-jersey">#02</div>
+    </div>
+    <div class="member-card">
+      <div class="member-avatar">AJ</div>
+      <div class="member-name">Abhijeet</div>
+      <div class="member-jersey">#03</div>
+    </div>
+    <div class="member-card">
+      <div class="member-avatar">RM</div>
+      <div class="member-name">Ram</div>
+      <div class="member-jersey">#04</div>
+    </div>
+    <div class="member-card">
+      <div class="member-avatar">MY</div>
+      <div class="member-name">Mayur</div>
+      <div class="member-jersey">#05</div>
+    </div>
+    <div class="member-card">
+      <div class="member-avatar">AB</div>
+      <div class="member-name">Abhay</div>
+      <div class="member-jersey">#06</div>
+    </div>
+    <div class="member-card">
+      <div class="member-avatar">PK</div>
+      <div class="member-name">Pankaj</div>
+      <div class="member-jersey">#07</div>
+    </div>
+    <div class="member-card">
+      <div class="member-avatar">RH</div>
+      <div class="member-name">Rahul</div>
+      <div class="member-jersey">#08</div>
+    </div>
+    <div class="member-card">
+      <div class="member-avatar">VG</div>
+      <div class="member-name">Vishal G</div>
+      <div class="member-jersey">#09</div>
+    </div>
+    <div class="member-card">
+      <div class="member-avatar">VN</div>
+      <div class="member-name">Vishal N</div>
+      <div class="member-jersey">#10</div>
+    </div>
+    <div class="member-card">
+      <div class="member-avatar">SB</div>
+      <div class="member-name">Sourabh</div>
+      <div class="member-jersey">#11</div>
+    </div>
+    <div class="member-card">
+      <div class="member-avatar">VK</div>
+      <div class="member-name">Vikas</div>
+      <div class="member-jersey">#12</div>
+    </div>
+    <div class="member-card">
+      <div class="member-avatar">RS</div>
+      <div class="member-name">Ramesh</div>
+      <div class="member-jersey">#13</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section id="payment">
+  <div class="payment-header reveal">
+    <div class="section-tag">Quick Payment</div>
+    <h2 class="section-title">Scan <span style="color:var(--electric-blue)">&amp; Pay</span></h2>
+    <p>Seamless UPI payment. Scan the QR code with any UPI app and complete your membership in seconds.</p>
+  </div>
+
+  <div class="qr-stage reveal">
+    <div class="qr-outer">
+      <div class="qr-scan-line"></div>
+      <div class="qr-placeholder">
+        <img src="qrcode.png" alt="UPI Payment QR Code" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+      <div class="qr-corners">
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <div class="qr-label">Scan to Pay Membership</div>
+    <div class="qr-upi">9096412364@axl</div>
+    <div class="payment-methods">
+      <div class="payment-pill">GPay</div>
+      <div class="payment-pill">PhonePe</div>
+      <div class="payment-pill">Paytm</div>
+      <div class="payment-pill">BHIM</div>
+      <div class="payment-pill">Any UPI</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">PUNTER<span>'S</span> BADMINTON SQUAD</div>
+      <div class="footer-tagline">Play Hard. Smash Harder.</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#squad">Squad</a></li>
+      <li><a href="#payment">Pay</a></li>
+    </ul>
+    <div class="footer-copy">© 2025 Punter's Badminton Squad</div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Nav background on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(20,20,24,0.97)';
+      nav.style.backdropFilter = 'blur(16px)';
+    } else {
+      nav.style.background = 'linear-gradient(180deg, rgba(20,20,24,0.95) 0%, transparent 100%)';
+    }
+  });
+</script>
+</body>
+</html>
