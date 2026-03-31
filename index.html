@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Punter's Badminton Squad</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Rajdhani:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>Punter's Badminton Squad</title>  <link rel="icon" type="image/png" href="racketshuttle.png"><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Exo+2:wght@400;600;700;900&family=Chakra+Petch:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --electric-blue: #0066FF;
@@ -26,11 +25,11 @@
   body {
     background: var(--charcoal);
     color: var(--white);
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Exo 2', sans-serif;
     overflow-x: hidden;
   }
 
-  /* ── NAV ── */
+  /* â”€â”€ NAV â”€â”€ */
   nav {
     position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
@@ -39,7 +38,7 @@
     backdrop-filter: blur(6px);
   }
   .nav-logo {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 900; font-size: 1.5rem; letter-spacing: 2px;
     color: var(--white);
     text-decoration: none;
@@ -47,7 +46,7 @@
   .nav-logo span { color: var(--neon-yellow); }
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a {
-    font-family: 'Rajdhani', sans-serif; font-weight: 600;
+    font-family: 'Exo 2', sans-serif; font-weight: 600;
     font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;
     color: var(--gray); text-decoration: none;
     transition: color 0.2s;
@@ -56,14 +55,14 @@
   .nav-cta {
     background: var(--electric-blue); color: var(--white);
     border: none; padding: 10px 24px;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 700; font-size: 1rem; letter-spacing: 2px;
     cursor: pointer; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
     text-transform: uppercase; transition: background 0.2s;
   }
   .nav-cta:hover { background: var(--blue-bright); }
 
-  /* ── HERO ── */
+  /* â”€â”€ HERO â”€â”€ */
   #hero {
     position: relative; height: 100vh; min-height: 700px;
     display: flex; align-items: center;
@@ -92,7 +91,7 @@
     100% { transform: translate(60px, 60px); }
   }
 
-  /* Shuttlecock SVG art — big, center-right */
+  /* Shuttlecock SVG art â€” big, center-right */
   .hero-shuttle-art {
     position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
     width: 520px; height: 520px; opacity: 0.92;
@@ -132,7 +131,7 @@
   }
 
   .hero-tag {
-    font-family: 'Space Mono', monospace; font-size: 0.72rem;
+    font-family: 'Chakra Petch', sans-serif; font-size: 0.72rem;
     letter-spacing: 4px; text-transform: uppercase;
     color: var(--neon-yellow); margin-bottom: 20px;
     display: flex; align-items: center; gap: 10px;
@@ -143,7 +142,7 @@
   }
 
   .hero-title {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 900; font-size: clamp(4rem, 9vw, 7rem);
     line-height: 0.9; text-transform: uppercase;
     letter-spacing: -1px;
@@ -167,7 +166,7 @@
   .btn-primary {
     background: var(--neon-yellow); color: var(--charcoal);
     border: none; padding: 16px 36px;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 700; font-size: 1.1rem; letter-spacing: 2px;
     text-transform: uppercase; cursor: pointer;
     clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
@@ -180,7 +179,7 @@
   .btn-secondary {
     background: transparent; color: var(--white);
     border: 1px solid rgba(255,255,255,0.25); padding: 16px 36px;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 700; font-size: 1.1rem; letter-spacing: 2px;
     text-transform: uppercase; cursor: pointer;
     clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
@@ -195,7 +194,7 @@
     padding-top: 32px;
   }
   .stat-number {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 900; font-size: 2.8rem;
     color: var(--electric-blue);
     line-height: 1;
@@ -206,10 +205,10 @@
     color: var(--gray); margin-top: 4px;
   }
 
-  /* ── SECTION SHARED ── */
+  /* â”€â”€ SECTION SHARED â”€â”€ */
   section { padding: 100px 48px; }
   .section-tag {
-    font-family: 'Space Mono', monospace; font-size: 0.7rem;
+    font-family: 'Chakra Petch', sans-serif; font-size: 0.7rem;
     letter-spacing: 4px; text-transform: uppercase;
     color: var(--neon-yellow); margin-bottom: 12px;
     display: flex; align-items: center; gap: 10px;
@@ -219,13 +218,13 @@
     background: var(--neon-yellow);
   }
   .section-title {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 900; font-size: clamp(2.5rem, 5vw, 4rem);
     text-transform: uppercase; line-height: 1;
     margin-bottom: 16px;
   }
 
-  /* ── SQUAD SECTION ── */
+  /* â”€â”€ SQUAD SECTION â”€â”€ */
   #squad { background: var(--charcoal-mid); }
   .squad-header { max-width: 600px; margin-bottom: 64px; }
   .squad-header p { color: var(--gray); font-size: 1.1rem; line-height: 1.6; margin-top: 16px; }
@@ -249,7 +248,7 @@
   }
   .squad-photo-label svg { opacity: 0.2; margin-bottom: 12px; }
   .squad-photo-label p {
-    font-family: 'Space Mono', monospace; font-size: 0.75rem;
+    font-family: 'Chakra Petch', sans-serif; font-size: 0.75rem;
     letter-spacing: 3px; text-transform: uppercase; color: var(--gray);
   }
   .squad-photo-corner {
@@ -285,11 +284,11 @@
     border: 2px solid rgba(0,102,255,0.3);
     margin: 0 auto 16px;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 900; font-size: 1.4rem; color: var(--electric-blue);
   }
   .member-name {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 700; font-size: 1.1rem; letter-spacing: 1px;
     text-transform: uppercase; color: var(--white); margin-bottom: 4px;
   }
@@ -299,11 +298,11 @@
   }
   .member-jersey {
     display: inline-block; margin-top: 10px;
-    font-family: 'Space Mono', monospace; font-size: 0.68rem;
+    font-family: 'Chakra Petch', sans-serif; font-size: 0.68rem;
     color: var(--gray); letter-spacing: 1px;
   }
 
-  /* ── MEMBERSHIP SECTION ── */
+  /* â”€â”€ MEMBERSHIP SECTION â”€â”€ */
   #membership {
     background: var(--charcoal);
     position: relative; overflow: hidden;
@@ -336,18 +335,18 @@
   .plan-badge {
     position: absolute; top: 20px; right: 20px;
     background: var(--neon-yellow); color: var(--charcoal);
-    font-family: 'Space Mono', monospace; font-size: 0.65rem;
+    font-family: 'Chakra Petch', sans-serif; font-size: 0.65rem;
     font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
     padding: 4px 12px;
     clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
   }
   .plan-name {
-    font-family: 'Space Mono', monospace; font-size: 0.75rem;
+    font-family: 'Chakra Petch', sans-serif; font-size: 0.75rem;
     letter-spacing: 3px; text-transform: uppercase;
     color: var(--gray); margin-bottom: 16px;
   }
   .plan-price {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 900; font-size: 3.5rem; line-height: 1;
     color: var(--white); margin-bottom: 6px;
   }
@@ -376,7 +375,7 @@
     display: block; width: 100%; margin-top: 32px;
     background: transparent; color: var(--white);
     border: 1px solid rgba(255,255,255,0.2); padding: 14px;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 700; font-size: 1rem; letter-spacing: 2px;
     text-transform: uppercase; cursor: pointer;
     transition: background 0.2s, border-color 0.2s;
@@ -397,13 +396,13 @@
     padding: 20px 24px;
   }
   .fee-note h4 {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 700; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase;
     color: var(--white); margin-bottom: 6px;
   }
   .fee-note p { font-size: 0.9rem; color: var(--gray); line-height: 1.5; }
 
-  /* ── PAYMENT SECTION ── */
+  /* â”€â”€ PAYMENT SECTION â”€â”€ */
   #payment {
     background: var(--charcoal-mid); text-align: center;
     position: relative; overflow: hidden;
@@ -470,7 +469,7 @@
   /* SVG QR pattern placeholder */
   .qr-placeholder svg { opacity: 0.9; }
   .qr-placeholder p {
-    font-family: 'Space Mono', monospace; font-size: 0.65rem;
+    font-family: 'Chakra Petch', sans-serif; font-size: 0.65rem;
     letter-spacing: 2px; text-transform: uppercase; color: var(--gray);
   }
 
@@ -485,12 +484,12 @@
 
   .qr-label {
     margin-top: 28px;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 700; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase;
     color: var(--white);
   }
   .qr-upi {
-    font-family: 'Space Mono', monospace; font-size: 0.78rem;
+    font-family: 'Chakra Petch', sans-serif; font-size: 0.78rem;
     color: var(--electric-blue); letter-spacing: 1px; margin-top: 6px;
   }
 
@@ -500,11 +499,40 @@
   .payment-pill {
     background: var(--charcoal); border: 1px solid rgba(255,255,255,0.1);
     padding: 8px 20px;
-    font-family: 'Space Mono', monospace; font-size: 0.72rem;
+    font-family: 'Chakra Petch', sans-serif; font-size: 0.72rem;
     letter-spacing: 2px; text-transform: uppercase; color: var(--gray);
   }
 
-  /* ── FOOTER ── */
+  /* â”€â”€ ADDRESS BLOCK â”€â”€ */
+  .address-block {
+    margin-top: 44px;
+    display: inline-flex; flex-direction: column; align-items: center; gap: 6px;
+    background: var(--charcoal-mid);
+    border: 1px solid rgba(0,102,255,0.25);
+    padding: 28px 40px;
+    position: relative;
+  }
+  .address-block::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--electric-blue), var(--neon-yellow), var(--electric-blue));
+  }
+  .address-tag {
+    font-family: 'Chakra Petch', sans-serif; font-size: 0.65rem;
+    letter-spacing: 4px; text-transform: uppercase; color: var(--neon-yellow);
+    margin-bottom: 4px;
+  }
+  .address-icon {
+    color: var(--electric-blue); margin-bottom: 2px;
+  }
+  .address-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 700; font-size: 1.35rem;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--white); text-align: center; line-height: 1.4;
+  }
+  .address-text span { color: var(--electric-blue); }
+
+  /* â”€â”€ FOOTER â”€â”€ */
   footer {
     background: var(--charcoal); padding: 48px;
     border-top: 1px solid rgba(255,255,255,0.06);
@@ -514,13 +542,13 @@
     flex-wrap: wrap; gap: 24px;
   }
   .footer-logo {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-weight: 900; font-size: 1.3rem; letter-spacing: 2px;
     color: var(--white);
   }
   .footer-logo span { color: var(--neon-yellow); }
   .footer-tagline {
-    font-family: 'Space Mono', monospace; font-size: 0.68rem;
+    font-family: 'Chakra Petch', sans-serif; font-size: 0.68rem;
     letter-spacing: 3px; color: var(--gray); text-transform: uppercase;
     margin-top: 4px;
   }
@@ -531,11 +559,11 @@
   }
   .footer-links a:hover { color: var(--neon-yellow); }
   .footer-copy {
-    font-family: 'Space Mono', monospace; font-size: 0.65rem;
+    font-family: 'Chakra Petch', sans-serif; font-size: 0.65rem;
     color: rgba(255,255,255,0.2); letter-spacing: 2px; text-transform: uppercase;
   }
 
-  /* ── RESPONSIVE ── */
+  /* â”€â”€ RESPONSIVE â”€â”€ */
   @media (max-width: 768px) {
     nav { padding: 16px 20px; }
     .nav-links { display: none; }
@@ -589,7 +617,7 @@
   <img src="racketshuttle.png" alt="Badminton Racket and Shuttlecock" class="hero-shuttle-art" style="object-fit: contain;">
 
   <div class="hero-content">
-    <div class="hero-tag">Established 2023 · Charholi, Pune, India</div>
+    <div class="hero-tag">Established 2023 Â· Charholi, Pune, India</div>
     <h1 class="hero-title">
       <span class="line1">Punter's</span>
       <span class="line2">Badminton</span>
@@ -608,11 +636,11 @@
       <div class="stat-label">Active Members</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number">7<span>×</span></div>
+      <div class="stat-number">7<span>Ã—</span></div>
       <div class="stat-label">Weekly Sessions</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number">5<span>★</span></div>
+      <div class="stat-number">5<span>â˜…</span></div>
       <div class="stat-label">Court Rating</div>
     </div>
   </div>
@@ -733,6 +761,13 @@
       <div class="payment-pill">BHIM</div>
       <div class="payment-pill">Any UPI</div>
     </div>
+    <div class="address-block">
+      <div class="address-tag">&#x25A0; Our Courts</div>
+      <div class="address-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="address-text">AKBA, Alandi Road<br><span>Charholi Phata</span>, Pune &mdash; 412105</div>
+    </div>
   </div>
 </section>
 
@@ -748,7 +783,7 @@
       <li><a href="#squad">Squad</a></li>
       <li><a href="#payment">Pay</a></li>
     </ul>
-    <div class="footer-copy">© Pramod Sultane</div>
+    <div class="footer-copy">Â© Pramod Sultane</div>
   </div>
 </footer>
 
